@@ -322,7 +322,7 @@ function UsersPage() {
                                 </div>
                             </div>
 
-                            <div>
+                            {/* <div>
                                 <label className="text-xs text-neutral-500 uppercase mb-1 block">Account Role</label>
                                 <div className="flex gap-2">
                                     {['parent', 'scanner', 'admin'].map(role => (
@@ -341,7 +341,7 @@ function UsersPage() {
                                         </button>
                                     ))}
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Bus assignment for scanner accounts */}
                             {form.role === 'scanner' && (

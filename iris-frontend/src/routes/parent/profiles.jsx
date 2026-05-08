@@ -61,8 +61,8 @@ function ParentProfiles() {
         return (
             <div className="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-10 text-center text-neutral-500">
                 <Users size={48} className="mx-auto mb-4 opacity-30" />
-                <p className="font-medium">No children linked to your account.</p>
-                <p className="text-sm mt-2">Contact the school admin to link your children.</p>
+                <p className="font-medium">No Students linked to your account.</p>
+                <p className="text-sm mt-2">Contact the school admin to link a Student.</p>
             </div>
         )
     }

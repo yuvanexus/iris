@@ -144,9 +144,9 @@ function ParentAttendance() {
         return (
             <div className="bg-neutral-900/60 backdrop-blur-xl border border-neutral-800 rounded-2xl p-10 text-center flex flex-col items-center">
                 <User size={48} className="text-neutral-600 mb-4" />
-                <p className="text-xl font-medium text-white mb-2">No Children Linked</p>
+                <p className="text-xl font-medium text-white mb-2">No Student Linked</p>
                 <p className="text-neutral-400 text-sm max-w-md mx-auto">
-                    Your account hasn't been linked to any student profiles yet. Please contact the school administrator.
+                    Your account hasn't been linked to any student profiles yet. Please contact the administrator.
                 </p>
             </div>
         )

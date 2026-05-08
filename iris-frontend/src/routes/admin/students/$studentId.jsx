@@ -14,7 +14,7 @@ function StudentDetailPage() {
     const { studentId } = Route.useParams()
     const navigate = useNavigate()
     const { token } = useAuth()
-    
+
     const [loading, setLoading] = useState(true)
     const [student, setStudent] = useState(null)
     const [bus, setBus] = useState(null)
@@ -22,7 +22,7 @@ function StudentDetailPage() {
     const [showParentModal, setShowParentModal] = useState(false)
     const [landmarks, setLandmarks] = useState([])
     const [attendance, setAttendance] = useState([])
-    
+
     const [editing, setEditing] = useState(false)
     const [editForm, setEditForm] = useState(null)
     const [busesList, setBusesList] = useState([])
@@ -39,18 +39,18 @@ function StudentDetailPage() {
         setLoading(true)
         try {
             const headers = { Authorization: `Bearer ${token}` }
-            
+
             // 1. Fetch student primary profile details
             const data = await fetchJson(api.studentProfile(studentId), { headers })
             setStudent(data)
             setEditForm({ ...data }) // init form
-            
+
             // Parallel load remaining stuff
             const pArr = [
                 fetchJson(api.faceLandmarks(studentId)).catch(() => []),
                 fetchJson(api.studentAttendance(studentId)).catch(() => [])
             ]
-            
+
             if (data.bus_id) {
                 pArr.push(fetchJson(api.bus(data.bus_id)).catch(() => null))
             } else {
@@ -146,16 +146,16 @@ function StudentDetailPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Left Column - Core Info */}
                 <div className="md:col-span-2 space-y-6">
-                    
+
                     {/* Main Profile Card */}
                     <div className="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden relative">
                         <div className="h-24 bg-gradient-to-r from-teal-500/20 to-purple-500/20 border-b border-neutral-800 absolute top-0 w-full" />
-                        
+
                         <div className="p-6 pt-16 relative z-10">
                             <div className="w-24 h-24 rounded-full bg-neutral-950 border-4 border-neutral-900 flex items-center justify-center text-3xl font-bold bg-gradient-to-br from-teal-400 to-purple-500 text-white shadow-xl mb-4">
                                 {student.name?.charAt(0)?.toUpperCase()}
                             </div>
-                            
+
                             {editing ? (
                                 <div className="space-y-4 max-w-lg mt-4">
                                     <div className="grid grid-cols-2 gap-4 text-left">
@@ -169,13 +169,13 @@ function StudentDetailPage() {
                                         </div>
                                         <div>
                                             <label className="text-xs text-neutral-500 uppercase">Department</label>
-                                            <select 
-                                                value={editForm.department_id || editForm.department || ''} 
-                                                onChange={e => setEditForm({ ...editForm, department_id: e.target.value, department: e.target.value })} 
+                                            <select
+                                                value={editForm.department_id || editForm.department || ''}
+                                                onChange={e => setEditForm({ ...editForm, department_id: e.target.value, department: e.target.value })}
                                                 className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white outline-none focus:border-teal-500 mt-1"
                                             >
                                                 <option value="">-- No Department --</option>
-                                                {departmentsList.map(d => <option key={d.id} value={d.id}>{d.name} {d.full_name ? `(${d.full_name})`: ''}</option>)}
+                                                {departmentsList.map(d => <option key={d.id} value={d.id}>{d.name} {d.full_name ? `(${d.full_name})` : ''}</option>)}
                                             </select>
                                         </div>
                                         <div>
@@ -198,11 +198,11 @@ function StudentDetailPage() {
                                 <>
                                     <h1 className="text-3xl font-bold text-white mb-1">{student.name}</h1>
                                     <p className="text-neutral-400 font-mono mb-6">{student.roll_number || 'No Roll Number'} • {student.department || 'No Dept'}</p>
-                                    
+
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4 pt-6 border-t border-neutral-800/50">
-                                        <InfoItem icon={<FileText size={16} className="text-neutral-500"/>} label="Contact" value={student.contact} />
-                                        <InfoItem icon={<User size={16} className="text-blue-500"/>} label="Parent Contact" value={student.parent_contact || student.extra_info?.parent_name} />
-                                        <InfoItem icon={<MapPin size={16} className="text-emerald-500"/>} label="Address" value={student.address} colSpan={2} />
+                                        <InfoItem icon={<FileText size={16} className="text-neutral-500" />} label="Contact" value={student.contact} />
+                                        {/* <InfoItem icon={<User size={16} className="text-blue-500" />} label="Profile Contact" value={student.parent_contact || student.extra_info?.parent_name} /> */}
+                                        <InfoItem icon={<MapPin size={16} className="text-emerald-500" />} label="Address" value={student.address} colSpan={2} />
                                     </div>
                                 </>
                             )}
@@ -230,7 +230,7 @@ function StudentDetailPage() {
                                             </div>
                                         </div>
                                         <div className="text-xs font-mono text-neutral-400 px-2 py-1 bg-neutral-800 rounded">
-                                            Bus #{log.bus_id?.substring(0,6)}
+                                            Bus #{log.bus_id?.substring(0, 6)}
                                         </div>
                                     </div>
                                 ))}
@@ -248,10 +248,10 @@ function StudentDetailPage() {
                                 <Bus size={18} className="text-blue-400" /> Transport
                             </h2>
                             {editing && (
-                                <select 
+                                <select
                                     className="bg-neutral-950 border border-neutral-700 text-white text-xs rounded-lg p-1 w-32 outline-none"
                                     value={editForm.bus_id || ''}
-                                    onChange={e => setEditForm({...editForm, bus_id: e.target.value})}
+                                    onChange={e => setEditForm({ ...editForm, bus_id: e.target.value })}
                                 >
                                     <option value="">-- No Bus --</option>
                                     {busesList.map(b => <option key={b.id} value={b.id}>{b.bus_number}</option>)}
@@ -273,15 +273,15 @@ function StudentDetailPage() {
                                 No bus assigned
                             </div>
                         )}
-                        
+
                         {/* Parent Assignment */}
                         <div className="mt-6 pt-4 border-t border-neutral-800">
-                            <h3 className="text-xs uppercase tracking-wider text-neutral-500 mb-3 font-semibold">Linked Parent Account</h3>
+                            <h3 className="text-xs uppercase tracking-wider text-neutral-500 mb-3 font-semibold">Linked Account</h3>
                             {editing ? (
-                                <select 
+                                <select
                                     className="bg-neutral-950 border border-neutral-700 text-white text-sm rounded-lg p-2 w-full outline-none"
                                     value={editForm.parent_id || ''}
-                                    onChange={e => setEditForm({...editForm, parent_id: e.target.value})}
+                                    onChange={e => setEditForm({ ...editForm, parent_id: e.target.value })}
                                 >
                                     <option value="">-- Unlinked --</option>
                                     {parentsList.map(p => <option key={p.id} value={p.id}>{p.full_name || p.email}</option>)}
@@ -298,7 +298,7 @@ function StudentDetailPage() {
                                 </button>
                             ) : student.parent_id ? (
                                 <div className="bg-neutral-950 rounded-xl p-4 border border-neutral-800 flex items-center justify-between">
-                                    <div className="text-sm text-white font-medium break-all">Checking parent {student.parent_id.substring(0,6)}...</div>
+                                    <div className="text-sm text-white font-medium break-all">Checking parent {student.parent_id.substring(0, 6)}...</div>
                                     <Loader2 size={16} className="text-neutral-500 animate-spin" />
                                 </div>
                             ) : (
@@ -314,7 +314,7 @@ function StudentDetailPage() {
                         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                             <ScanFace size={18} className="text-purple-400" /> Face Biomectrics
                         </h2>
-                        
+
                         {landmarks.length > 0 ? (
                             <div className="space-y-3">
                                 <div className="bg-purple-500/10 border border-purple-500/20 text-purple-300 rounded-xl p-4 text-center">
@@ -352,12 +352,12 @@ function StudentDetailPage() {
                         </div>
                         <h3 className="text-xl font-bold text-white mb-1">{parentUser.full_name || 'Parent Profile'}</h3>
                         <p className="text-neutral-400 text-sm mb-6">{parentUser.email}</p>
-                        
+
                         <div className="space-y-4">
-                            <div>
+                            {/* <div>
                                 <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-semibold mb-1">Account Role</p>
                                 <p className="text-sm text-neutral-300 capitalize">{parentUser.role}</p>
-                            </div>
+                            </div> */}
                             <div>
                                 <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-semibold mb-1">Account ID</p>
                                 <p className="text-sm text-neutral-300 font-mono break-all">{parentUser.id}</p>
@@ -378,7 +378,7 @@ function StudentDetailPage() {
 
 function InfoItem({ icon, label, value, colSpan = 1 }) {
     // Basic Icon map
-    const map = { Contact: FileText, 'Parent Contact': User, Address: MapPin }
+    const map = { Contact: FileText, 'Contact': User, Address: MapPin }
     const I = map[label] || User
     return (
         <div className={`col-span-${colSpan} flex gap-3`}>

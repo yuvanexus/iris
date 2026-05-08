@@ -42,12 +42,12 @@ function ParentSettings() {
             <p className="text-xs text-neutral-500 uppercase tracking-wider mb-1">Email</p>
             <p className="text-neutral-200 font-medium">{user?.email}</p>
           </div>
-          <div>
+          {/* <div>
             <p className="text-xs text-neutral-500 uppercase tracking-wider mb-1">Role</p>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium">
               <Users size={14} /> Parent
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

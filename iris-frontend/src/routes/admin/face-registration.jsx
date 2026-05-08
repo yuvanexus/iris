@@ -112,7 +112,7 @@ function FaceRegistrationPage() {
         if (!form.name.trim()) errors.name = 'Name is required'
         if (!form.rollNumber.trim()) errors.rollNumber = 'Roll number is required'
         if (!form.contact.trim()) errors.contact = 'Contact number is required'
-        if (!form.parentId) errors.parentId = 'Parent / Guardian is required'
+        if (!form.parentId) errors.parentId = 'Parent / Guardian / user is required'
         if (!form.busId) errors.busId = 'Bus assignment is required'
         setFormErrors(errors)
         return Object.keys(errors).length === 0
@@ -428,7 +428,7 @@ function FaceRegistrationPage() {
                             <div className="h-px bg-neutral-800 my-6"></div>
 
                             <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                                <Users size={20} className="text-teal-400" /> Parent / Guardian <span className="text-red-400">*</span>
+                                <Users size={20} className="text-teal-400" /> Parent / Guardian / User <span className="text-red-400">*</span>
                             </h2>
 
                             {/* Selected parent chip */}
@@ -654,7 +654,7 @@ function FaceRegistrationPage() {
                                     <SummaryRow label="Contact" value={form.contact} />
                                     <SummaryRow label="Address" value={form.address || '—'} />
                                     <div className="h-px bg-neutral-800 my-2"></div>
-                                    <SummaryRow label="Parent / Guardian" value={selectedParent ? `${selectedParent.full_name || 'Unnamed'} (${selectedParent.email})` : '—'} />
+                                    <SummaryRow label="Parent / Guardian / User" value={selectedParent ? `${selectedParent.full_name || 'Unnamed'} (${selectedParent.email})` : '—'} />
                                     <SummaryRow label="Assigned Bus" value={buses.find(b => String(b.id) === String(form.busId))?.bus_number || '—'} />
                                 </div>
                             </div>
