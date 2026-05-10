@@ -15,4 +15,5 @@ export default defineConfig({
     tailwindcss(),
     basicSsl(),
   ],
+   base: process.env.VITE_BASE_PATH || "/iris",
 });
